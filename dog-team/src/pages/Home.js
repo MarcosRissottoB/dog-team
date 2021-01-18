@@ -1,22 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import Typography from '@material-ui/core/Typography';
+import styled from 'styled-components';
 
 // Services
 import dogService from '../services/dogService';
 
 function Home() {
   const [dogs, setDogs] = useState([]);
-  // const [dog, setDog] = useState(undefined);
-
-  // const getDog = async () => {
-  //   const dog = await dogService.findById();
-  //   console.log('findById in home', dog);
-  //   setDog(dog);
-  // }
-
-  // useEffect( () => {
-  //   getDog();
-  // }, []);
-
 
   const getDogs = async () => {
     const dogs = await dogService.getAll();
@@ -28,20 +18,24 @@ function Home() {
     getDogs();
   }, []);
 
+
   return (
     <div>
-      {/* {dog ? 
-        dog
-        : 'No dog found'
-      } */}
       {dogs ? 
         <ul>
-          {dogs.map( item => <li>{item}</li>)}
+          {dogs.map( item => 
+            <Li key={item}>
+              <a><Typography>{item}</Typography></a>
+            </Li>)}
         </ul>
         : 'No dogs found'
       }
     </div>
   )
 }
+
+const Li = styled.l1`
+  list-style: none;
+`;
 
 export default Home;
