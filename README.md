@@ -1,2 +1,3 @@
 # dog-team
-Dog team app with cra
+Dog team app
+
