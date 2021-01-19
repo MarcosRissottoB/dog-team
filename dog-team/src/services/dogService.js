@@ -11,7 +11,6 @@ const dogService = {
   getAll: async () => {
     try {
       const { data } = await axios.get(`${apiBaseUrl}breeds/list/all`);
-      console.log('dogs', data.message);
       const result = Object.values(data.message);
       return result;
     } catch (error) {
@@ -20,7 +19,7 @@ const dogService = {
   },
 
   // Find by id
-  // Endpoint: breed/hound/images/random/3
+  // Endpoint: breed/hound/images/random/5
   findById: async (id = 'akita') => {
     try {
     const { data } = await axios.get(`${apiBaseUrl}breed/${id}/images/random/5`);
