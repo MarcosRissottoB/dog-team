@@ -20,6 +20,12 @@ const useStyles = makeStyles((theme) => ({
   li: {
     listStyle: 'none',
   },
+  item: {
+    width: '230px',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+  }
 }));
 
 function DogList({dogs}) {
@@ -37,8 +43,8 @@ function DogList({dogs}) {
                     <Grid item>
                       <Avatar>W</Avatar>
                     </Grid>
-                    <Grid item xs>
-                      <Typography>{item}</Typography>
+                    <Grid item xs={6}>
+                      <Typography className={classes.item}>{item}</Typography>
                     </Grid>
                   </Grid>
                 </Paper>
