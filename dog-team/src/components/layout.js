@@ -1,17 +1,20 @@
 import React from 'react';
+// import { Layout } from '@material-ui/core';
 
 // Components
 import Content from './content';
 import Header from './header';
 
-function Layout({children}) {
+function LayoutComponent({children}) {
+  // const { Footer } = Layout;
+
   return (
     <>
       <Header />
       <Content>{children}</Content>
-      <footer>footer</footer>
+      {/* <Footer>footer</Footer> */}
     </>
   )
 }
 
-export default Layout;
+export default LayoutComponent;
