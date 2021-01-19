@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import styled from 'styled-components';
+import uuid from 'react-uuid';
 
 // Services
 import dogService from '../services/dogService';
+
+const Li = styled.li`
+  list-style: none;
+`;
 
 function Home() {
   const [dogs, setDogs] = useState([]);
 
   const getDogs = async () => {
     const dogs = await dogService.getAll();
-    console.log('dogs in home', dogs);
     setDogs(dogs);
   }
 
@@ -24,8 +29,10 @@ function Home() {
       {dogs ? 
         <ul>
           {dogs.map( item => 
-            <Li key={item}>
-              <a><Typography>{item}</Typography></a>
+            <Li key={uuid()}>
+              {/* to={{pathname: `/dog/${item}`}} */}
+              {/* <Link to='/dog/miniature'><Typography>{item}</Typography></Link> */}
+              <Link to={{pathname: `/dog/${item}`}}><Typography>{item}</Typography></Link>
             </Li>)}
         </ul>
         : 'No dogs found'
@@ -33,9 +40,5 @@ function Home() {
     </div>
   )
 }
-
-const Li = styled.l1`
-  list-style: none;
-`;
 
 export default Home;

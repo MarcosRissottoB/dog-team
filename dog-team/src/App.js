@@ -1,14 +1,21 @@
-import './App.css';
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 
-// import Home from './pages/Home';
+import Home from './pages/Home';
 import DogDetail from './pages/DogDetail';
 
 function App() {
   return (
-  <div className="App">
-  {/* <Home /> */}
-      <DogDetail />
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path='/' component={Home} />
+        <Route exact path='/dog/:id' component={DogDetail} />
+      </Switch>
+    </Router>
   );
 }
 
