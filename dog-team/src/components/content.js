@@ -6,7 +6,7 @@ function Content({children}) {
   return (
     <>
       <CssBaseline />
-      <Container maxWidth="sm" style={{ backgroundColor: '#cfe8fc', height: '90vh' }} >
+      <Container maxWidth="md" style={{ backgroundColor: '#FAFAFA', height: 'auto' }} >
         {children}
       </Container>
     </>

@@ -12,7 +12,8 @@ const dogService = {
     try {
       const { data } = await axios.get(`${apiBaseUrl}breeds/list/all`);
       const result = Object.values(data.message);
-      return result;
+      const dogs = result.filter((item => item.length !== 0));
+      return dogs;
     } catch (error) {
       throw error;
     }
