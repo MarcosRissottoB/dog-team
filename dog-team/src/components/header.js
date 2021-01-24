@@ -6,6 +6,7 @@ import {
   Button
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
 // Style
 const useStyles = makeStyles((theme) => ({
@@ -17,7 +18,15 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    color: 'white',
+    textDecoration: 'none',
+    fontSize: '24px'
   },
+  link: {
+    color: 'white',
+    textDecoration: 'none',
+    fontSize: '18px'
+  }
 }));
 
 function Header() {
@@ -27,10 +36,12 @@ function Header() {
     <>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
+          <Link to="/" className={classes.title}>
             Dog Team
-          </Typography>
-          <Button color="inherit">Add Dog</Button>
+          </Link>
+          <Link to="/team" className={classes.link}>
+            Team
+          </Link>
         </Toolbar>
       </AppBar>
     </>
