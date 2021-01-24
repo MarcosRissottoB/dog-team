@@ -18,9 +18,8 @@ function Home() {
     getDogs();
   }, []);
 
-
   return (
-    <div>
+    <div >
       <DogList dogs={dogs}/> 
     </div>
   )
