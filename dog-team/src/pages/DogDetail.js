@@ -1,33 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
+// Components
+import Breed from '../components/breed';
+
 // Services
 import dogService from '../services/dogService';
 
 function DogDetail() {
-  const [dog, setDog] = useState(undefined);
+  const [dogImages, setDogImages] = useState(undefined);
   const { id } = useParams();
 
-  const getDog = async (id = 'australian') => {
-    console.log('id in dog detail', id);
-    const dog = await dogService.findById(id);
-    console.log('findById in dog detail', dog);
-    setDog(dog);
+  const getDog = async (id) => {
+    try {
+      const dogImages = await dogService.findById(id);
+      setDogImages(dogImages);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect( () => {
     getDog(id);
   }, [id]);
 
-  console.log('desde dog detail');
-
   return (
-    <div>
-      {dog ? 
-        dog
-        : 'No dog found'
-      }
-    </div>
+    <>
+      <Breed id={id} dogImages={dogImages}/>
+    </>
   )
 }
 
