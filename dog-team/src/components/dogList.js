@@ -21,9 +21,9 @@ function DogList({dogs}) {
         <Grid container spacing={2}>
             <ul>
               {dogs.map( (item) => 
-              <Grid container item xs={6} spacing={1} key={uuid()}>
-                <DogItem item={item} />
-              </Grid>
+                <Grid container item xs={6} spacing={1} key={uuid()}>
+                  <DogItem item={item} />
+                </Grid>
               )}
             </ul>
         </Grid>

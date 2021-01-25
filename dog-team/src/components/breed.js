@@ -9,6 +9,7 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 // Style
 const useStyles = makeStyles((theme) => ({
@@ -38,13 +39,12 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
-    underline: 'none'
+    underline: 'none',
   }
 }));
 
 function Breed({id, dogImages}) {
   const classes = useStyles();
-  console.log('dogImages', dogImages);
 
   return (
     <div className={classes.div}>
@@ -61,9 +61,11 @@ function Breed({id, dogImages}) {
                   style={{textTransform: 'capitalize'}}
                   title={id}
                   actionIcon={
+                    <Link to={`/team?url=${tile}`} className={classes.link}>
                     <IconButton aria-label={`info about ${tile.title}`} className={classes.icon}>
                       <AddAPhotoIcon />
                     </IconButton>
+                    </Link>
                   }
                 />
               </GridListTile>
@@ -78,6 +80,7 @@ function Breed({id, dogImages}) {
               Try with the australian breed
             </Typography>
             <Button color="inherit">
+              <ArrowBackIcon />
               <Link to="/" className={classes.link}>
                 Go home
               </Link>
