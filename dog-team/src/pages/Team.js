@@ -5,6 +5,7 @@ import Alert from '@material-ui/lab/Alert';
 
 // Components
 import DogPictures from '../components/dogPictures';
+
 // Style
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,16 +40,14 @@ function Team({location}) {
   const addDog = (url) => {
     if (action === 'add') {
       if (dogs.length <= 10) {
-        console.log('url', url);
         dogs.push(url);
         setDogs(dogs)
       } else {
         setCountMessage(true);
       }
     } else {
-      console.log('action', action);
-        const newDogs = dogs.filter(item => item !== url)
-        setDogs(newDogs)
+      const newDogs = dogs.filter(item => item !== url)
+      setDogs(newDogs)
     }
   }
 
