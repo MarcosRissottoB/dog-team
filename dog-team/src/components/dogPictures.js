@@ -41,7 +41,6 @@ const useStyles = makeStyles((theme) => ({
 
 function DogPictures({id, dogImages, action}) {
   const classes = useStyles();
-  console.log('DogPictures dogImages', dogImages);
 
   return (
     <div className={classes.rootImages}>
@@ -58,10 +57,10 @@ function DogPictures({id, dogImages, action}) {
               title={id}
               actionIcon={
                 <Link to={`/team?url=${tile}?action=${action}`} className={classes.link}>
-                    <IconButton aria-label={`info about ${tile}`} className={classes.icon}>
-                      { action === 'add' ? <AddAPhotoIcon /> : <DeleteIcon /> }
-                    </IconButton>
-                  </Link>
+                  <IconButton aria-label={`info about ${tile}`} className={classes.icon}>
+                    { action === 'add' ? <AddAPhotoIcon /> : <DeleteIcon /> }
+                  </IconButton>
+                </Link>
               }
             />
           </GridListTile>
