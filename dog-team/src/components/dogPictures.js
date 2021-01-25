@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function DogPictures({id, dogImages, action}) {
+function DogPictures({dogImages, action}) {
   const classes = useStyles();
 
   return (
@@ -51,10 +51,10 @@ function DogPictures({id, dogImages, action}) {
       {dogImages ? 
         dogImages.map((tile) => (
           <GridListTile key={uuid()} cols={tile.cols || 1}>
-            <img src={tile} alt={id} />
+            <img src={tile} alt={tile} />
             <GridListTileBar
               style={{textTransform: 'capitalize'}}
-              title={id}
+              title={tile}
               actionIcon={
                 <Link to={`/team?url=${tile}?action=${action}`} className={classes.link}>
                   <IconButton aria-label={`info about ${tile}`} className={classes.icon}>

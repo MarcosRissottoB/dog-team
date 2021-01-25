@@ -57,17 +57,13 @@ function Team({location}) {
 
   return (
     <div>
-      <h1>Desde Team page</h1>
-      <ul>
-        {dogs.map((item) => 
-          <DogPictures id={item} dogImages={dogs} action={'remove'} />   
-        )}
-      </ul>
-        {countMessage && 
-          <div className={classes.root}>
-            <Alert severity="error">Delete an image, you reached the limit of 10 images</Alert>
-          </div>
-        }
+      <h1>Your Dog Team </h1>
+      <DogPictures dogImages={dogs} action={'remove'} />
+      {countMessage && 
+        <div className={classes.root}>
+          <Alert severity="error">Delete an image, you reached the limit of 10 images</Alert>
+        </div>
+      }
     </div>
   )
 }
