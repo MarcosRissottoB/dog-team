@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react';
 import { withRouter } from "react-router";
 import { makeStyles } from '@material-ui/core/styles';
 import Alert from '@material-ui/lab/Alert';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 // Components
 import DogPictures from '../components/dogPictures';
@@ -14,6 +15,10 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(2),
     },
   },
+  loader: {
+    display: 'flex',
+    justifyContent: 'center',
+  }
 }));
 
 // Static data
@@ -30,6 +35,7 @@ const initialDogs = [
 function Team({location}) {
   const [dogs, setDogs] = useState(initialDogs);
   const [countMessage, setCountMessage] = useState(false);
+  const [loader, setLoader] = useState(false);
   const classes = useStyles();
 
   let { search } = location;
@@ -38,10 +44,11 @@ function Team({location}) {
   const action = query.get("action");
 
   const addDog = (url) => {
+    setLoader(true);
     if (action === 'add') {
       if (dogs.length <= 10) {
         dogs.push(url);
-        setDogs(dogs)
+        setDogs(dogs);
       } else {
         setCountMessage(true);
       }
@@ -49,6 +56,7 @@ function Team({location}) {
       const newDogs = dogs.filter(item => item !== url)
       setDogs(newDogs)
     }
+    setLoader(false);
   }
 
   useEffect(() => {
@@ -58,11 +66,16 @@ function Team({location}) {
   return (
     <div>
       <h1>Your Dog Team </h1>
-      <DogPictures dogImages={dogs} action={'remove'} />
-      {countMessage && 
-        <div className={classes.root}>
-          <Alert severity="error">Delete an image, you reached the limit of 10 images</Alert>
+      {loader ?
+        <div className={classes.loader}>
+          <CircularProgress />
         </div>
+        : <DogPictures dogImages={dogs} action={'remove'} />
+      }
+      {countMessage && 
+          <div className={classes.root}>
+            <Alert severity="error">Delete an image, you reached the limit of 10 images</Alert>
+          </div>
       }
     </div>
   )
