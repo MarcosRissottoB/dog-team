@@ -24,7 +24,6 @@ const dogService = {
   findById: async (id = 'akita') => {
     try {
     const { data } = await axios.get(`${apiBaseUrl}breed/${id}/images/random/5`);
-    console.log('dog', data);
     return data.message;
     } catch (error) {
       throw error;
