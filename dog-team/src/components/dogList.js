@@ -27,7 +27,7 @@ function DogList({dogs}) {
               )}
             </ul>
         </Grid>
-        : 'No dogs found'}     
+        : 'Breed not found'}     
     </div>
   );
 }
