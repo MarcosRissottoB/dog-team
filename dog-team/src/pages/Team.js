@@ -42,10 +42,12 @@ function Team({location}) {
   const query = new URLSearchParams(search);
   const url = query.get("url");
   const action = query.get("action");
-
-  const addDog = (url) => {
+  const id =  query.get("id");
+  console.log('query', query);
+  const updateDogTeam = (url) => {
     setLoader(true);
-    if (action === 'add') {
+    console.log('action', action);
+    if (action == 'add') {
       if (dogs.length <= 10) {
         dogs.push(url);
         setDogs(dogs);
@@ -54,14 +56,15 @@ function Team({location}) {
       }
     } else {
       const newDogs = dogs.filter(item => item !== url)
+      console.log('remove', newDogs);
       setDogs(newDogs)
     }
     setLoader(false);
   }
 
   useEffect(() => {
-    addDog(url);
-  }, []);
+    url && updateDogTeam(url);
+  }, [id]);
 
   return (
     <div>

@@ -56,7 +56,7 @@ function DogPictures({dogImages, action}) {
               style={{textTransform: 'capitalize'}}
               title={tile}
               actionIcon={
-                <Link to={`/team?url=${tile}?action=${action}`} className={classes.link}>
+                <Link to={`/team?url=${tile}?action=${action}?id=${uuid()}`} className={classes.link}>
                   <IconButton aria-label={`info about ${tile}`} className={classes.icon}>
                     { action === 'add' ? <AddAPhotoIcon /> : <DeleteIcon /> }
                   </IconButton>
