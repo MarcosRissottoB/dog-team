@@ -21,47 +21,50 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-// Static data
-const initialDogs = [
-  'https://images.dog.ceo/breeds/australian-shepherd/sadie.jpg',
-  'https://images.dog.ceo/breeds/australian-shepherd/sadie.jpg',
-  'https://images.dog.ceo/breeds/australian-shepherd/sadie.jpg',
-  'https://images.dog.ceo/breeds/australian-shepherd/sadie.jpg',
-  'https://images.dog.ceo/breeds/australian-shepherd/sadie.jpg',
-  'https://images.dog.ceo/breeds/australian-shepherd/sadie.jpg',
-  'https://images.dog.ceo/breeds/australian-shepherd/sadie.jpg',
-  'https://images.dog.ceo/breeds/australian-shepherd/sadie.jpg'
-]
 function Team({location}) {
-  const [dogs, setDogs] = useState(initialDogs);
+  const [dogs, setDogs] = useState(undefined);
   const [countMessage, setCountMessage] = useState(false);
   const [loader, setLoader] = useState(false);
   const classes = useStyles();
 
   let { search } = location;
   const query = new URLSearchParams(search);
-  const url = query.get("url");
-  const action = query.get("action");
+  const url = query.get('url');
 
-  const addDog = (url) => {
+  const getParams = () => {
+    const params = location.search.slice(1).split('?').reduce((acc, s) => {
+      const [k, v] = s.split('=')
+      return Object.assign(acc, {[k]: v})
+    }, {})
+    return params;
+  }
+
+  const updateDogTeam = (url) => {
     setLoader(true);
+    const {action, id } = getParams();
+
+    let newDogs = localStorage.getItem('InitialData').split(',');
     if (action === 'add') {
-      if (dogs.length <= 10) {
-        dogs.push(url);
-        setDogs(dogs);
+      if (newDogs.length < 10) {
+        newDogs.push(url);
       } else {
         setCountMessage(true);
       }
-    } else {
-      const newDogs = dogs.filter(item => item !== url)
-      setDogs(newDogs)
     }
+    if (action ==='remove') {
+      newDogs.splice(id, 1);
+    } 
+    localStorage.setItem('InitialData', newDogs);
+    setDogs(newDogs);
     setLoader(false);
   }
 
   useEffect(() => {
-    addDog(url);
-  }, []);
+  }, [dogs]);
+
+  useEffect(() => {
+    updateDogTeam(url);
+  }, [url]);
 
   return (
     <div>

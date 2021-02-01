@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 // Services
 import dogService from '../services/dogService';
+import initialDataServices from '../services/initialDataServices';
 
 // Components
 import DogList from '../components/dogList';
@@ -14,8 +15,13 @@ function Home() {
     setDogs(dogs);
   }
 
+  const setInitialDataInStorage = () => {
+    localStorage.setItem('InitialData', initialDataServices.initialData);
+  }
+
   useEffect( () => {
     getDogs();
+    setInitialDataInStorage();
   }, []);
 
   return (
