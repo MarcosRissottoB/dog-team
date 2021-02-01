@@ -39,9 +39,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function DogPictures({dogImages, action}) {
+function DogPictures({dogImages, action = 'add'}) {
   const classes = useStyles();
-
   return (
     <div className={classes.rootImages}>
     <GridList cellHeight={160} className={classes.gridList} cols={2}>
@@ -49,14 +48,14 @@ function DogPictures({dogImages, action}) {
         <ListSubheader component="div">Images of the breed</ListSubheader>
       </GridListTile>
       {dogImages ? 
-        dogImages.map((tile) => (
+        dogImages.map((tile, index) => (
           <GridListTile key={uuid()} cols={tile.cols || 1}>
             <img src={tile} alt={tile} />
             <GridListTileBar
               style={{textTransform: 'capitalize'}}
               title={tile}
               actionIcon={
-                <Link to={`/team?url=${tile}?action=${action}?id=${uuid()}`} className={classes.link}>
+                <Link to={`/team?url=${tile}?action=${action}?id=${index}`} className={classes.link}>
                   <IconButton aria-label={`info about ${tile}`} className={classes.icon}>
                     { action === 'add' ? <AddAPhotoIcon /> : <DeleteIcon /> }
                   </IconButton>
