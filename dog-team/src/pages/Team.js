@@ -21,50 +21,50 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-// Static data
-const initialDogs = [
-  'https://images.dog.ceo/breeds/australian-shepherd/sadie.jpg',
-  'https://images.dog.ceo/breeds/australian-shepherd/sadie.jpg',
-  'https://images.dog.ceo/breeds/australian-shepherd/sadie.jpg',
-  'https://images.dog.ceo/breeds/australian-shepherd/sadie.jpg',
-  'https://images.dog.ceo/breeds/australian-shepherd/sadie.jpg',
-  'https://images.dog.ceo/breeds/australian-shepherd/sadie.jpg',
-  'https://images.dog.ceo/breeds/australian-shepherd/sadie.jpg',
-  'https://images.dog.ceo/breeds/australian-shepherd/sadie.jpg'
-]
 function Team({location}) {
-  const [dogs, setDogs] = useState(initialDogs);
+  const [dogs, setDogs] = useState(undefined);
   const [countMessage, setCountMessage] = useState(false);
   const [loader, setLoader] = useState(false);
   const classes = useStyles();
 
   let { search } = location;
   const query = new URLSearchParams(search);
-  const url = query.get("url");
-  const action = query.get("action");
-  const id =  query.get("id");
-  console.log('query', query);
+  const url = query.get('url');
+
+  const getParams = () => {
+    const params = location.search.slice(1).split('?').reduce((acc, s) => {
+      const [k, v] = s.split('=')
+      return Object.assign(acc, {[k]: v})
+    }, {})
+    return params;
+  }
+
   const updateDogTeam = (url) => {
     setLoader(true);
-    console.log('action', action);
-    if (action == 'add') {
-      if (dogs.length <= 10) {
-        dogs.push(url);
-        setDogs(dogs);
+    const {action, id } = getParams();
+
+    let newDogs = localStorage.getItem('InitialData').split(',');
+    if (action === 'add') {
+      if (newDogs.length < 10) {
+        newDogs.push(url);
       } else {
         setCountMessage(true);
       }
-    } else {
-      const newDogs = dogs.filter(item => item !== url)
-      console.log('remove', newDogs);
-      setDogs(newDogs)
     }
+    if (action ==='remove') {
+      newDogs.splice(id, 1);
+    } 
+    localStorage.setItem('InitialData', newDogs);
+    setDogs(newDogs);
     setLoader(false);
   }
 
   useEffect(() => {
-    url && updateDogTeam(url);
-  }, [id]);
+  }, [dogs]);
+
+  useEffect(() => {
+    updateDogTeam(url);
+  }, [url]);
 
   return (
     <div>
